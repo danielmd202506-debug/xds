@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preload" as="image" href="./assets/hero-bike.webp" fetchpriority="high" />
   <title>喜德盛 XDS - 速度重新定义边界</title>
   <style>
     :root {
@@ -1145,7 +1146,7 @@
   <header class="site-header">
     <nav class="nav" aria-label="主导航">
       <div class="brand" aria-label="XDS 喜德盛">
-        <img class="brand-logo" src="./assets/logo-xds.png" alt="XDS 喜德盛" />
+        <img class="brand-logo" src="./assets/logo-xds.png" alt="XDS 喜德盛" decoding="async" />
         <span class="brand-sub">超轻科技 中国好车</span>
       </div>
 
@@ -1177,7 +1178,7 @@
   <main>
     <section class="hero" id="top">
       <div class="hero-bg" aria-hidden="true">
-        <img src="./assets/hero-bike.jpg" alt="" />
+        <img src="./assets/hero-bike.webp" alt="" fetchpriority="high" decoding="async" />
       </div>
       <div class="light-beam"></div>
       <div class="hero-inner">
@@ -1201,19 +1202,19 @@
       </div>
       <div class="card-grid">
         <button class="image-card" data-title="公路竞速" data-copy="AD 系列：轻量、刚性和空气动力学，为速度而生。">
-          <img src="./assets/road.jpg" alt="公路竞速自行车" />
+          <img src="./assets/road.webp" alt="公路竞速自行车" loading="lazy" decoding="async" />
           <span class="content"><h3>公路竞速</h3><p>AD 系列</p></span><span class="arrow">→</span>
         </button>
         <button class="image-card" data-title="山地越野" data-copy="英雄系列：稳定操控与通过性，适合林道、爬坡和越野路线。">
-          <img src="./assets/mountain.jpg" alt="山地越野骑行" />
+          <img src="./assets/mountain.webp" alt="山地越野骑行" loading="lazy" decoding="async" />
           <span class="content"><h3>山地越野</h3><p>英雄系列</p></span><span class="arrow">→</span>
         </button>
         <button class="image-card" data-title="城市通勤" data-copy="轻速场景：舒适、省力、适合日常通勤与短途出行。">
-          <img src="./assets/city.jpg" alt="城市通勤骑行" />
+          <img src="./assets/city.webp" alt="城市通勤骑行" loading="lazy" decoding="async" />
           <span class="content"><h3>城市通勤</h3><p>轻速场景</p></span><span class="arrow">→</span>
         </button>
         <button class="image-card" data-title="砾石探索" data-copy="GR 系列：兼顾公路效率与非铺装路面的探索能力。">
-          <img src="./assets/gravel.jpg" alt="砾石路骑行" />
+          <img src="./assets/gravel.webp" alt="砾石路骑行" loading="lazy" decoding="async" />
           <span class="content"><h3>砾石探索</h3><p>GR 系列</p></span><span class="arrow">→</span>
         </button>
       </div>
@@ -1235,7 +1236,7 @@
 
         <article class="bike-recommend">
           <div class="bike-image">
-            <img src="./assets/bike-card.jpg" alt="XDS AD350 自行车" />
+            <img src="./assets/bike-card.webp" alt="XDS AD350 自行车" loading="lazy" decoding="async" />
           </div>
           <div class="bike-info">
             <h3>XDS AD350</h3>
@@ -1258,19 +1259,19 @@
       </div>
       <div class="card-grid">
         <button class="image-card tech-card" data-title="X-LAB 碳纤维技术" data-copy="更轻、更强、更稳定的碳纤维结构设计。">
-          <img src="./assets/carbon.jpg" alt="碳纤维纹理" />
+          <img src="./assets/carbon.webp" alt="碳纤维纹理" loading="lazy" decoding="async" />
           <span class="content"><span class="tech-icon"><svg viewBox="0 0 24 24"><path d="M12 3 4 7v6c0 4.5 3.4 7.2 8 8 4.6-.8 8-3.5 8-8V7l-8-4Z"/><path d="m9 12 2 2 4-5"/></svg></span><h3>X-LAB碳纤维技术</h3><p>更轻 · 更强 · 更稳定</p></span>
         </button>
         <button class="image-card tech-card" data-title="风洞空气动力学" data-copy="通过风洞验证减少阻力，让骑行速度更高效。">
-          <img src="./assets/aero.jpg" alt="风洞测试" />
+          <img src="./assets/aero.webp" alt="风洞测试" loading="lazy" decoding="async" />
           <span class="content"><span class="tech-icon"><svg viewBox="0 0 24 24"><path d="M3 8h12a4 4 0 1 1-4 4"/><path d="M4 14h10a3 3 0 1 1-3 3"/><path d="M3 18h6"/></svg></span><h3>风洞空气动力学</h3><p>更快 · 更省力</p></span>
         </button>
         <button class="image-card tech-card" data-title="智能制造工艺" data-copy="高精度、一致性和品质保证贯穿生产流程。">
-          <img src="./assets/factory.jpg" alt="智能制造工厂" />
+          <img src="./assets/factory.webp" alt="智能制造工厂" loading="lazy" decoding="async" />
           <span class="content"><span class="tech-icon"><svg viewBox="0 0 24 24"><path d="M6 20V8l6 4V8l6 4v8H6Z"/><path d="M8 16h2M12 16h2M16 16h2"/></svg></span><h3>智能制造工艺</h3><p>高精度 · 一致性 · 品质保证</p></span>
         </button>
         <button class="image-card tech-card" data-title="国家队认证" data-copy="赛事级性能验证，是冠军车队选择的底气。">
-          <img src="./assets/team.jpg" alt="国家队骑行" />
+          <img src="./assets/team.webp" alt="国家队骑行" loading="lazy" decoding="async" />
           <span class="content"><span class="tech-icon"><svg viewBox="0 0 24 24"><path d="M12 3v12"/><path d="m8 7 4-4 4 4"/><path d="M4 14c2 0 2 3 4 3s2-3 4-3 2 3 4 3 2-3 4-3"/><path d="M5 21h14"/></svg></span><h3>国家队认证</h3><p>赛事级性能 · 冠军之选</p></span>
         </button>
       </div>
@@ -1280,22 +1281,22 @@
       <h2 class="section-title">骑向你热爱的生活</h2>
       <div class="card-grid" style="margin-top:18px">
         <button class="image-card" data-title="城市通勤" data-copy="绿色出行、轻松自由，适合日常生活节奏。">
-          <img src="./assets/life-city.jpg" alt="城市通勤生活" /><span class="content"><span class="life-icon"><svg viewBox="0 0 24 24"><path d="M6 19a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM18 19a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M6 16h5l3-6h2l2 6M10 9h4"/></svg></span><h3>城市通勤</h3><p>绿色出行 · 轻松自由</p></span>
+          <img src="./assets/life-city.webp" alt="城市通勤生活" loading="lazy" decoding="async" /><span class="content"><span class="life-icon"><svg viewBox="0 0 24 24"><path d="M6 19a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM18 19a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M6 16h5l3-6h2l2 6M10 9h4"/></svg></span><h3>城市通勤</h3><p>绿色出行 · 轻松自由</p></span>
         </button>
         <button class="image-card" data-title="周末骑游" data-copy="探索自然，释放压力，把周末交给路线。">
-          <img src="./assets/life-weekend.jpg" alt="周末骑游" /><span class="content"><span class="life-icon"><svg viewBox="0 0 24 24"><path d="M4 17 10 9l4 5 3-4 3 7H4Z"/><circle cx="8" cy="6" r="2"/></svg></span><h3>周末骑游</h3><p>探索自然 · 释放压力</p></span>
+          <img src="./assets/life-weekend.webp" alt="周末骑游" loading="lazy" decoding="async" /><span class="content"><span class="life-icon"><svg viewBox="0 0 24 24"><path d="M4 17 10 9l4 5 3-4 3 7H4Z"/><circle cx="8" cy="6" r="2"/></svg></span><h3>周末骑游</h3><p>探索自然 · 释放压力</p></span>
         </button>
         <button class="image-card" data-title="长途旅行" data-copy="远方在路上，风景在心中，适合稳定舒适的长距离车型。">
-          <img src="./assets/life-travel.jpg" alt="长途旅行" /><span class="content"><span class="life-icon"><svg viewBox="0 0 24 24"><path d="M12 21s7-5.2 7-11a7 7 0 0 0-14 0c0 5.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2"/></svg></span><h3>长途旅行</h3><p>远方在路上 · 风景在心中</p></span>
+          <img src="./assets/life-travel.webp" alt="长途旅行" loading="lazy" decoding="async" /><span class="content"><span class="life-icon"><svg viewBox="0 0 24 24"><path d="M12 21s7-5.2 7-11a7 7 0 0 0-14 0c0 5.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2"/></svg></span><h3>长途旅行</h3><p>远方在路上 · 风景在心中</p></span>
         </button>
         <button class="image-card" data-title="专业训练" data-copy="突破自我、挑战极限，用训练数据打磨表现。">
-          <img src="./assets/life-training.jpg" alt="专业训练" /><span class="content"><span class="life-icon"><svg viewBox="0 0 24 24"><path d="M4 19h16"/><path d="M7 16V9M12 16V5M17 16v-8"/></svg></span><h3>专业训练</h3><p>突破自我 · 挑战极限</p></span>
+          <img src="./assets/life-training.webp" alt="专业训练" loading="lazy" decoding="async" /><span class="content"><span class="life-icon"><svg viewBox="0 0 24 24"><path d="M4 19h16"/><path d="M7 16V9M12 16V5M17 16v-8"/></svg></span><h3>专业训练</h3><p>突破自我 · 挑战极限</p></span>
         </button>
       </div>
     </section>
 
     <section class="stats">
-      <img src="./assets/champion.jpg" alt="" />
+      <img src="./assets/champion.webp" alt="" loading="lazy" decoding="async" />
       <div class="stats-inner">
         <h2 class="stats-title">冠军选择的力量</h2>
         <div class="stat"><strong>300+</strong><span>国内赛事征程</span></div>
@@ -1322,7 +1323,7 @@
           </div>
         </div>
         <div class="map-panel">
-          <img src="./assets/map.jpg" alt="全国门店地图" />
+          <img src="./assets/map.webp" alt="全国门店地图" loading="lazy" decoding="async" />
           <article class="store-card">
             <h3>喜德盛深圳旗舰店</h3>
             <p>深圳市南山区科技园科苑路159号</p>
@@ -1344,16 +1345,16 @@
       </div>
       <div class="card-grid">
         <button class="image-card academy-card" data-title="如何选择你的第一辆公路车" data-copy="从预算、路况、车架尺码和配置开始选。">
-          <img src="./assets/academy-1.jpg" alt="公路车选购" /><span class="tag">新手指南</span><span class="content"><h3>如何选择你的第一辆公路车</h3><p>1.2万阅读</p></span>
+          <img src="./assets/academy-1.webp" alt="公路车选购" loading="lazy" decoding="async" /><span class="tag">新手指南</span><span class="content"><h3>如何选择你的第一辆公路车</h3><p>1.2万阅读</p></span>
         </button>
         <button class="image-card academy-card" data-title="公路车爬坡技巧全攻略" data-copy="踏频、齿比、坐姿和补给节奏都很关键。">
-          <img src="./assets/academy-2.jpg" alt="爬坡技巧" /><span class="tag">进阶骑行</span><span class="content"><h3>公路车爬坡技巧全攻略</h3><p>8560阅读</p></span>
+          <img src="./assets/academy-2.webp" alt="爬坡技巧" loading="lazy" decoding="async" /><span class="tag">进阶骑行</span><span class="content"><h3>公路车爬坡技巧全攻略</h3><p>8560阅读</p></span>
         </button>
         <button class="image-card academy-card" data-title="100公里骑行训练计划" data-copy="分阶段建立耐力、速度和恢复能力。">
-          <img src="./assets/academy-3.jpg" alt="训练计划" /><span class="tag">训练计划</span><span class="content"><h3>100公里骑行训练计划</h3><p>6320阅读</p></span>
+          <img src="./assets/academy-3.webp" alt="训练计划" loading="lazy" decoding="async" /><span class="tag">训练计划</span><span class="content"><h3>100公里骑行训练计划</h3><p>6320阅读</p></span>
         </button>
         <button class="image-card academy-card" data-title="骑行头盔选购指南" data-copy="安全认证、贴合度、通风和重量都要看。">
-          <img src="./assets/academy-4.jpg" alt="头盔选购" /><span class="tag">装备推荐</span><span class="content"><h3>骑行头盔选购指南</h3><p>4780阅读</p></span>
+          <img src="./assets/academy-4.webp" alt="头盔选购" loading="lazy" decoding="async" /><span class="tag">装备推荐</span><span class="content"><h3>骑行头盔选购指南</h3><p>4780阅读</p></span>
         </button>
       </div>
     </section>
@@ -1370,7 +1371,7 @@
     <div class="footer-inner">
       <div>
         <div class="brand">
-          <img class="brand-logo" src="./assets/logo-xds.png" alt="XDS 喜德盛" />
+          <img class="brand-logo" src="./assets/logo-xds.png" alt="XDS 喜德盛" loading="lazy" decoding="async" />
           <span class="brand-sub">超轻科技 中国好车</span>
         </div>
         <p>深圳市喜德盛自行车股份有限公司始创于1995年，专注高端自行车研发制造，为用户提供专业骑行装备与服务。</p>
