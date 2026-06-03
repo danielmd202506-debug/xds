@@ -30,9 +30,9 @@
       margin: 0;
       min-height: 100vh;
       background:
-        radial-gradient(circle at 72% 8%, rgba(8, 119, 255, .28), transparent 32%),
-        radial-gradient(circle at 18% 42%, rgba(0, 180, 255, .12), transparent 30%),
-        linear-gradient(180deg, #020409 0%, #06101a 46%, #02060b 100%);
+        radial-gradient(circle at 72% 8%, rgba(8, 119, 255, .18), transparent 32%),
+        radial-gradient(circle at 18% 42%, rgba(0, 180, 255, .08), transparent 30%),
+        linear-gradient(180deg, #020409 0%, #02060a 38%, #02060b 100%);
       color: var(--text);
       font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", Arial, sans-serif;
       overflow-x: hidden;
@@ -170,6 +170,9 @@
 
     main {
       padding-top: 72px;
+      background:
+        linear-gradient(180deg, #02060a 0, #02060a 640px, rgba(3, 12, 22, .96) 760px, #061422 1080px, #02070c 100%),
+        radial-gradient(circle at 68% 10%, rgba(8, 119, 255, .16), transparent 34%);
     }
 
     .hero {
@@ -178,6 +181,7 @@
       overflow: hidden;
       border-bottom: 0;
       background: #02060a;
+      margin-bottom: -22px;
     }
 
     .hero::before {
@@ -245,7 +249,22 @@
     .section {
       width: var(--container);
       margin: 0 auto;
-      padding: 34px 0 0;
+      padding: 56px 0 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero + .section::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: -110px;
+      width: 100vw;
+      height: 170px;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, rgba(2, 6, 10, .05), rgba(3, 12, 22, .86) 58%, rgba(6, 20, 34, .96));
+      pointer-events: none;
+      z-index: -1;
     }
 
     .section-head {
@@ -1049,7 +1068,7 @@
       }
 
       .section {
-        padding-top: 28px;
+        padding-top: 42px;
       }
 
       .section-head {
