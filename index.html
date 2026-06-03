@@ -1,0 +1,1492 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>喜德盛 XDS - 速度重新定义边界</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #02060a;
+      --panel: rgba(6, 18, 33, .78);
+      --panel-strong: rgba(8, 26, 48, .92);
+      --line: rgba(104, 178, 255, .22);
+      --line-strong: rgba(104, 178, 255, .46);
+      --text: #f7fbff;
+      --muted: rgba(225, 238, 255, .74);
+      --soft: rgba(225, 238, 255, .56);
+      --blue: #0877ff;
+      --blue-2: #20b7ff;
+      --radius: 8px;
+      --container: min(1180px, calc(100vw - 48px));
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 72% 8%, rgba(8, 119, 255, .28), transparent 32%),
+        radial-gradient(circle at 18% 42%, rgba(0, 180, 255, .12), transparent 30%),
+        linear-gradient(180deg, #020409 0%, #06101a 46%, #02060b 100%);
+      color: var(--text);
+      font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 50;
+      height: 72px;
+      background: linear-gradient(180deg, rgba(2, 6, 10, .88), rgba(2, 6, 10, .36));
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .nav {
+      width: var(--container);
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 34px;
+    }
+
+    .brand {
+      min-width: 166px;
+    }
+
+    .brand-logo {
+      width: 154px;
+      height: auto;
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, .12));
+    }
+
+    .brand-sub {
+      display: block;
+      margin-top: 4px;
+      font-size: 11px;
+      color: rgba(255, 255, 255, .74);
+      letter-spacing: 7px;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      gap: 34px;
+    }
+
+    .nav-link {
+      border: 0;
+      background: none;
+      padding: 9px 0;
+      color: rgba(255, 255, 255, .86);
+      font-size: 14px;
+      transition: color .18s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus-visible {
+      color: #fff;
+      outline: none;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .icon-btn {
+      width: 36px;
+      height: 36px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .04);
+      display: grid;
+      place-items: center;
+      transition: background .18s ease, box-shadow .18s ease;
+    }
+
+    .icon-btn:hover,
+    .icon-btn:focus-visible {
+      outline: none;
+      background: rgba(8, 119, 255, .18);
+      box-shadow: 0 0 0 1px rgba(69, 163, 255, .36);
+    }
+
+    .hamburger { display: none; }
+
+    .primary-btn,
+    .ghost-btn {
+      min-height: 44px;
+      border-radius: var(--radius);
+      padding: 0 24px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+
+    .primary-btn {
+      background: linear-gradient(135deg, var(--blue), #0062ed);
+      box-shadow: 0 10px 28px rgba(8, 119, 255, .32);
+    }
+
+    .ghost-btn {
+      background: rgba(255, 255, 255, .04);
+      border-color: rgba(255, 255, 255, .22);
+    }
+
+    .primary-btn:hover,
+    .ghost-btn:hover,
+    .primary-btn:focus-visible,
+    .ghost-btn:focus-visible {
+      outline: none;
+      transform: translateY(-1px);
+      box-shadow: 0 12px 30px rgba(8, 119, 255, .34);
+    }
+
+    main {
+      padding-top: 72px;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 650px;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(78, 156, 255, .13);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(2, 6, 10, .95) 0%, rgba(2, 6, 10, .74) 34%, rgba(2, 6, 10, .15) 78%),
+        radial-gradient(circle at 70% 48%, rgba(8, 119, 255, .2), transparent 34%);
+      z-index: 1;
+    }
+
+    .light-beam {
+      position: absolute;
+      right: -8vw;
+      top: 100px;
+      width: 58vw;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #21a7ff, #71d9ff);
+      box-shadow: 0 0 14px #1597ff, 0 0 32px rgba(13, 135, 255, .8);
+      transform: rotate(-31deg);
+      transform-origin: right center;
+      z-index: 0;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center right;
+      opacity: .96;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      width: var(--container);
+      min-height: 650px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(380px, 520px) 1fr;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .hero-copy {
+      padding-top: 24px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(40px, 4vw, 62px);
+      line-height: 1.12;
+      letter-spacing: 0;
+      font-weight: 900;
+      text-shadow: 0 0 30px rgba(8, 119, 255, .18);
+    }
+
+    .hero p {
+      margin: 24px 0 34px;
+      color: rgba(244, 250, 255, .88);
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .section {
+      width: var(--container);
+      margin: 0 auto;
+      padding: 34px 0 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: clamp(24px, 2.2vw, 34px);
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .section-subtitle {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .text-link {
+      border: 0;
+      background: none;
+      color: rgba(255, 255, 255, .82);
+      white-space: nowrap;
+      padding: 8px 0;
+    }
+
+    .text-link:hover,
+    .text-link:focus-visible {
+      color: #fff;
+      outline: none;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .image-card {
+      position: relative;
+      min-height: 168px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: var(--radius);
+      background: #08111b;
+      text-align: left;
+    }
+
+    .image-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .38s ease, filter .28s ease;
+    }
+
+    .image-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, .08), rgba(0, 0, 0, .72));
+    }
+
+    .image-card .content {
+      position: absolute;
+      inset: auto 18px 16px;
+      z-index: 1;
+    }
+
+    .image-card h3 {
+      margin: 0 0 6px;
+      font-size: 21px;
+      letter-spacing: 0;
+    }
+
+    .image-card p {
+      margin: 0;
+      color: rgba(255, 255, 255, .76);
+      font-size: 14px;
+    }
+
+    .image-card .arrow {
+      position: absolute;
+      right: 16px;
+      bottom: 15px;
+      z-index: 1;
+      font-size: 22px;
+      color: #fff;
+    }
+
+    .image-card:hover img,
+    .image-card:focus-visible img {
+      transform: scale(1.06);
+      filter: brightness(1.08);
+    }
+
+    .image-card:focus-visible {
+      outline: 2px solid rgba(55, 160, 255, .82);
+      outline-offset: 2px;
+    }
+
+    .ai-panel {
+      display: grid;
+      grid-template-columns: minmax(280px, 400px) 1fr;
+      gap: 34px;
+      align-items: center;
+      padding: 28px;
+      border: 1px solid rgba(32, 147, 255, .36);
+      border-radius: var(--radius);
+      background:
+        radial-gradient(circle at 45% 50%, rgba(8, 119, 255, .18), transparent 38%),
+        linear-gradient(135deg, rgba(5, 21, 43, .96), rgba(2, 10, 20, .9));
+      box-shadow: inset 0 0 80px rgba(8, 119, 255, .13);
+    }
+
+    .ai-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0;
+      font-size: 32px;
+      line-height: 1.1;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      height: 20px;
+      padding: 0 7px;
+      border: 1px solid rgba(255, 71, 116, .5);
+      border-radius: 4px;
+      color: #ff6c91;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .selector-list {
+      margin: 22px 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .choice-field {
+      width: 100%;
+      min-height: 42px;
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 6px;
+      background: rgba(1, 9, 18, .58);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 13px;
+      color: rgba(255, 255, 255, .9);
+    }
+
+    .choice-field span {
+      white-space: nowrap;
+    }
+
+    .choice-field select {
+      min-width: 150px;
+      max-width: 58%;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--soft);
+      text-align: right;
+      appearance: none;
+      cursor: pointer;
+    }
+
+    .choice-field select option {
+      color: #07111d;
+      background: #fff;
+    }
+
+    .bike-recommend {
+      display: grid;
+      grid-template-columns: 230px 1fr;
+      gap: 28px;
+      padding: 26px;
+      border: 1px solid rgba(92, 174, 255, .34);
+      border-radius: var(--radius);
+      background: rgba(5, 18, 35, .72);
+    }
+
+    .bike-image {
+      border-radius: var(--radius);
+      background: #e9edf5;
+      padding: 16px;
+      min-height: 180px;
+      display: grid;
+      place-items: center;
+    }
+
+    .bike-info h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+    }
+
+    .bike-info .price {
+      margin: 0 0 16px;
+      font-size: 30px;
+      font-weight: 900;
+    }
+
+    .spec-list {
+      padding: 0;
+      margin: 0 0 18px;
+      list-style: none;
+      display: grid;
+      gap: 9px;
+      color: rgba(231, 242, 255, .82);
+      font-size: 14px;
+    }
+
+    .spec-list li::before {
+      content: "";
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      margin-right: 8px;
+      border-radius: 50%;
+      background: var(--blue-2);
+      box-shadow: 0 0 10px rgba(32, 183, 255, .8);
+      vertical-align: 1px;
+    }
+
+    .tech-card {
+      min-height: 156px;
+    }
+
+    .tech-icon,
+    .life-icon {
+      width: 42px;
+      height: 42px;
+      margin-bottom: 12px;
+      border: 1px solid rgba(255, 255, 255, .52);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: rgba(0, 0, 0, .24);
+    }
+
+    .stats {
+      position: relative;
+      margin-top: 34px;
+      min-height: 210px;
+      overflow: hidden;
+      border-top: 1px solid rgba(255, 255, 255, .05);
+      border-bottom: 1px solid rgba(255, 255, 255, .05);
+      background: #040b13;
+    }
+
+    .stats img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: .38;
+    }
+
+    .stats::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(2, 6, 10, .94), rgba(2, 6, 10, .3), rgba(2, 6, 10, .94));
+    }
+
+    .stats-inner {
+      position: relative;
+      z-index: 1;
+      width: var(--container);
+      min-height: 210px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(260px, 1fr) repeat(3, minmax(210px, max-content));
+      gap: 22px;
+      align-items: center;
+    }
+
+    .stats-title {
+      margin: 0;
+      font-size: clamp(24px, 2.3vw, 34px);
+    }
+
+    .stat {
+      text-align: center;
+      min-width: 0;
+    }
+
+    .stat strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--blue);
+      font-size: clamp(36px, 4vw, 54px);
+      line-height: 1;
+      white-space: nowrap;
+      word-break: keep-all;
+      overflow-wrap: normal;
+    }
+
+    .stat strong.long-stat {
+      display: inline-block;
+      min-width: max-content;
+      font-size: clamp(32px, 2.8vw, 44px);
+    }
+
+    .stat span {
+      color: rgba(255, 255, 255, .86);
+      font-size: 16px;
+      font-weight: 700;
+      white-space: nowrap;
+      word-break: keep-all;
+    }
+
+    .stores {
+      position: relative;
+      overflow: hidden;
+      margin-top: 0;
+      padding: 54px 0;
+      background: linear-gradient(90deg, #02060a 0%, #071522 54%, #04101c 100%);
+    }
+
+    .stores .section {
+      position: relative;
+      z-index: 1;
+      padding: 0;
+      display: grid;
+      grid-template-columns: minmax(320px, 430px) 1fr;
+      gap: 54px;
+      align-items: center;
+    }
+
+    .store-tools {
+      display: grid;
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .search-box {
+      display: flex;
+      min-height: 48px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .06);
+    }
+
+    .search-box input {
+      min-width: 0;
+      flex: 1;
+      border: 0;
+      outline: 0;
+      padding: 0 18px;
+      background: transparent;
+      color: #fff;
+    }
+
+    .search-box button {
+      border: 0;
+      min-width: 132px;
+      background: linear-gradient(135deg, #1685ff, #0067ec);
+      font-weight: 700;
+    }
+
+    .service-pills {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .service-pills button {
+      min-height: 38px;
+      padding: 0 16px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .05);
+      color: rgba(255, 255, 255, .88);
+    }
+
+    .map-panel {
+      position: relative;
+      min-height: 285px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid rgba(90, 160, 255, .22);
+    }
+
+    .map-panel img {
+      width: 100%;
+      height: 100%;
+      min-height: 285px;
+      object-fit: cover;
+      filter: saturate(1.1) brightness(.9);
+    }
+
+    .store-card {
+      position: absolute;
+      left: 42px;
+      bottom: 32px;
+      width: min(320px, calc(100% - 56px));
+      padding: 18px;
+      border: 1px solid rgba(96, 173, 255, .36);
+      border-radius: var(--radius);
+      background: rgba(3, 13, 25, .88);
+      backdrop-filter: blur(10px);
+    }
+
+    .store-card h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    .store-card p {
+      margin: 0 0 6px;
+      color: rgba(232, 243, 255, .8);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .academy-card {
+      min-height: 150px;
+    }
+
+    .academy-card h3 {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 18px;
+    }
+
+    .tag {
+      position: absolute;
+      left: 16px;
+      top: 14px;
+      z-index: 1;
+      height: 24px;
+      padding: 0 9px;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      background: rgba(8, 119, 255, .82);
+      color: #dceeff;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .footer {
+      margin-top: 38px;
+      border-top: 1px solid rgba(255, 255, 255, .08);
+      background: rgba(2, 7, 12, .94);
+    }
+
+    .footer-inner {
+      width: var(--container);
+      margin: 0 auto;
+      padding: 34px 0;
+      display: grid;
+      grid-template-columns: 1.4fr repeat(3, 1fr);
+      gap: 34px;
+    }
+
+    .footer p,
+    .footer a {
+      color: rgba(228, 240, 255, .64);
+      font-size: 13px;
+      line-height: 1.7;
+      text-decoration: none;
+    }
+
+    .footer h3 {
+      margin: 0 0 12px;
+      font-size: 15px;
+    }
+
+    .footer ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 6px;
+    }
+
+    .qr-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .qr-item {
+      display: grid;
+      gap: 8px;
+      justify-items: center;
+    }
+
+    .qr {
+      width: 92px;
+      height: 92px;
+      padding: 7px;
+      border-radius: 4px;
+      background: #fff;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .24);
+    }
+
+    .qr svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .qr-item span {
+      color: rgba(238, 247, 255, .72);
+      font-size: 12px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .float-tools {
+      position: fixed;
+      right: 24px;
+      top: 35vh;
+      z-index: 40;
+      width: 72px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 16px;
+      background: rgba(9, 14, 21, .82);
+      backdrop-filter: blur(14px);
+    }
+
+    .float-tools button {
+      width: 100%;
+      min-height: 70px;
+      border: 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+      background: transparent;
+      display: grid;
+      place-items: center;
+      gap: 4px;
+      color: rgba(255, 255, 255, .86);
+      font-size: 12px;
+    }
+
+    .float-tools button:last-child { border-bottom: 0; }
+
+    .float-tools svg,
+    .icon-btn svg,
+    .tech-icon svg,
+    .life-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.9;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 80;
+      display: grid;
+      place-items: center;
+      padding: 22px;
+      background: rgba(0, 7, 14, .68);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease;
+    }
+
+    .modal.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .dialog {
+      width: min(94vw, 460px);
+      overflow: hidden;
+      border: 1px solid var(--line-strong);
+      border-radius: 16px;
+      background: linear-gradient(145deg, rgba(8, 29, 54, .97), rgba(3, 10, 20, .97));
+      box-shadow: 0 32px 90px rgba(0, 0, 0, .62), 0 0 42px rgba(8, 119, 255, .25);
+    }
+
+    .dialog header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 22px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .dialog h2 {
+      margin: 0;
+      font-size: 21px;
+    }
+
+    .close {
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .06);
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .dialog-body {
+      padding: 18px 22px 22px;
+      color: rgba(235, 245, 255, .88);
+      line-height: 1.7;
+    }
+
+    .dialog-actions {
+      display: flex;
+      gap: 12px;
+      padding: 0 22px 22px;
+    }
+
+    .dialog-actions button {
+      flex: 1;
+    }
+
+    @media (max-width: 1120px) {
+      :root { --container: min(100vw - 36px, 960px); }
+
+      .nav { gap: 18px; }
+      .nav-links { gap: 20px; }
+      .hero-inner { grid-template-columns: minmax(330px, 460px) 1fr; }
+      .hero-bike img { width: min(650px, 62vw); }
+      .bike-recommend { grid-template-columns: 190px 1fr; }
+      .footer-inner { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 860px) {
+      :root { --container: min(100vw - 28px, 720px); }
+
+      .site-header { height: 64px; }
+      main { padding-top: 64px; }
+      .nav { justify-content: space-between; }
+      .brand { min-width: 132px; }
+      .brand-logo { width: 126px; }
+      .brand-sub { font-size: 9px; letter-spacing: 4px; }
+      .nav-links {
+        position: fixed;
+        left: 14px;
+        right: 14px;
+        top: 72px;
+        display: none;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        padding: 14px;
+        border: 1px solid rgba(255, 255, 255, .12);
+        border-radius: 14px;
+        background: rgba(4, 13, 24, .96);
+      }
+      .nav-links.open { display: grid; }
+      .nav-link {
+        min-height: 40px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, .05);
+      }
+      .nav-actions .icon-btn { display: none; }
+      .nav-actions .primary-btn {
+        min-height: 38px;
+        padding: 0 14px;
+      }
+      .hamburger {
+        display: grid;
+      }
+
+      .hero,
+      .hero-inner {
+        min-height: auto;
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        padding: 54px 0 32px;
+      }
+
+      .hero::before {
+        background:
+          linear-gradient(180deg, rgba(2, 6, 10, .72), rgba(2, 6, 10, .4) 45%, rgba(2, 6, 10, .92)),
+          radial-gradient(circle at 70% 24%, rgba(8, 119, 255, .18), transparent 40%);
+      }
+
+      .hero-copy {
+        position: relative;
+        z-index: 2;
+        padding-top: 0;
+      }
+
+      .hero h1 {
+        max-width: 420px;
+        font-size: clamp(34px, 9vw, 48px);
+      }
+
+      .hero p {
+        margin: 18px 0 24px;
+        font-size: 16px;
+      }
+
+      .hero-bg img { object-position: 62% center; }
+
+      .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .image-card { min-height: 150px; }
+
+      .ai-panel {
+        grid-template-columns: 1fr;
+        padding: 20px;
+      }
+
+      .bike-recommend {
+        grid-template-columns: 1fr;
+      }
+
+      .bike-image {
+        min-height: 150px;
+      }
+
+      .stats-inner {
+        grid-template-columns: repeat(2, minmax(220px, max-content));
+        justify-content: center;
+        padding: 30px 0;
+      }
+
+      .stats-title {
+        grid-column: 1 / -1;
+        text-align: center;
+      }
+
+      .stores .section {
+        grid-template-columns: 1fr;
+      }
+
+      .float-tools {
+        right: 12px;
+        top: auto;
+        bottom: 12px;
+        width: auto;
+        display: flex;
+        border-radius: 999px;
+      }
+
+      .float-tools button {
+        min-width: 58px;
+        min-height: 54px;
+        border-bottom: 0;
+        border-right: 1px solid rgba(255, 255, 255, .08);
+        font-size: 10px;
+      }
+
+      .footer-inner {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 540px) {
+      :root { --container: calc(100vw - 24px); }
+
+      .nav-actions .primary-btn {
+        display: none;
+      }
+
+      .hero {
+        min-height: 640px;
+      }
+
+      .hero-inner {
+        padding-top: 28px;
+      }
+
+      .hero-bg img { object-position: 68% center; }
+
+      .hero-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-actions button {
+        padding: 0 12px;
+      }
+
+      .section {
+        padding-top: 28px;
+      }
+
+      .section-head {
+        align-items: start;
+      }
+
+      .card-grid {
+        gap: 10px;
+      }
+
+      .image-card {
+        min-height: 138px;
+      }
+
+      .image-card .content {
+        inset: auto 12px 12px;
+      }
+
+      .image-card h3 {
+        font-size: 17px;
+      }
+
+      .image-card p {
+        font-size: 12px;
+      }
+
+      .ai-title {
+        font-size: 26px;
+      }
+
+      .stats-inner {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .stat strong {
+        font-size: 42px;
+      }
+
+      .search-box {
+        border-radius: 12px;
+      }
+
+      .search-box button {
+        min-width: 104px;
+      }
+
+      .service-pills {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+
+      .service-pills button {
+        padding: 0 8px;
+        font-size: 12px;
+      }
+
+      .store-card {
+        left: 14px;
+        bottom: 14px;
+        width: calc(100% - 28px);
+      }
+
+      .academy-card {
+        min-height: 132px;
+      }
+
+      .academy-card h3 {
+        font-size: 15px;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+        padding-bottom: 86px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="主导航">
+      <div class="brand" aria-label="XDS 喜德盛">
+        <img class="brand-logo" src="./assets/logo-xds.png" alt="XDS 喜德盛" />
+        <span class="brand-sub">超轻科技 中国好车</span>
+      </div>
+
+      <div class="nav-links" id="navLinks">
+        <button class="nav-link" data-title="产品" data-copy="产品中心包含公路车、山地车、城市通勤和砾石探索系列。">产品</button>
+        <button class="nav-link" data-title="技术" data-copy="查看 X-LAB 碳纤维、空气动力学和智能制造技术。">技术</button>
+        <button class="nav-link" data-title="赛事" data-copy="浏览车队故事、赛事里程和冠军装备。">赛事</button>
+        <button class="nav-link" data-title="骑行学院" data-copy="选车技巧、训练计划、装备推荐都在这里。">骑行学院</button>
+        <button class="nav-link" data-title="门店" data-action="scroll" data-target="stores">门店</button>
+        <button class="nav-link" data-title="服务" data-copy="服务支持包含保修政策、保养预约和正品查询。">服务</button>
+        <button class="nav-link" data-title="关于我们" data-copy="了解喜德盛品牌、发展历程、新闻中心和加入我们。">关于我们</button>
+      </div>
+
+      <div class="nav-actions">
+        <button class="icon-btn" aria-label="搜索" data-title="搜索" data-copy="可搜索车型、门店、文章和服务。">
+          <svg viewBox="0 0 24 24"><path d="m21 21-4.3-4.3"/><circle cx="11" cy="11" r="7"/></svg>
+        </button>
+        <button class="icon-btn" aria-label="会员中心" data-title="会员中心" data-copy="登录后可查看预约试骑、保养记录和收藏车型。">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.8-4 5-6 8-6s6.2 2 8 6"/></svg>
+        </button>
+        <button class="primary-btn" data-title="预约试骑" data-copy="请选择附近门店并留下联系方式，顾问会为你确认试骑时间。">预约试骑</button>
+        <button class="icon-btn hamburger" id="menuBtn" aria-label="打开菜单">
+          <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <div class="hero-bg" aria-hidden="true">
+        <img src="./assets/hero-bike.jpg" alt="" />
+      </div>
+      <div class="light-beam"></div>
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <h1>让速度<br />重新定义边界</h1>
+          <p>连续多年中国高端自行车销量领先品牌，为热爱骑行的人打造更快、更轻、更可靠的战车。</p>
+          <div class="hero-actions">
+            <button class="primary-btn" data-action="scroll" data-target="products">探索产品</button>
+            <button class="ghost-btn" data-title="了解更多" data-copy="品牌故事、技术亮点和冠军车队信息已经准备好。">了解更多</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="products">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">找到属于你的战车</h2>
+        </div>
+        <button class="text-link" data-title="全部产品" data-copy="已打开全部产品列表。">查看全部产品 →</button>
+      </div>
+      <div class="card-grid">
+        <button class="image-card" data-title="公路竞速" data-copy="AD 系列：轻量、刚性和空气动力学，为速度而生。">
+          <img src="./assets/road.jpg" alt="公路竞速自行车" />
+          <span class="content"><h3>公路竞速</h3><p>AD 系列</p></span><span class="arrow">→</span>
+        </button>
+        <button class="image-card" data-title="山地越野" data-copy="英雄系列：稳定操控与通过性，适合林道、爬坡和越野路线。">
+          <img src="./assets/mountain.jpg" alt="山地越野骑行" />
+          <span class="content"><h3>山地越野</h3><p>英雄系列</p></span><span class="arrow">→</span>
+        </button>
+        <button class="image-card" data-title="城市通勤" data-copy="轻速场景：舒适、省力、适合日常通勤与短途出行。">
+          <img src="./assets/city.jpg" alt="城市通勤骑行" />
+          <span class="content"><h3>城市通勤</h3><p>轻速场景</p></span><span class="arrow">→</span>
+        </button>
+        <button class="image-card" data-title="砾石探索" data-copy="GR 系列：兼顾公路效率与非铺装路面的探索能力。">
+          <img src="./assets/gravel.jpg" alt="砾石路骑行" />
+          <span class="content"><h3>砾石探索</h3><p>GR 系列</p></span><span class="arrow">→</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="ai-panel">
+        <div>
+          <h2 class="ai-title">AI选车助手 <span class="badge">NEW</span></h2>
+          <p class="section-subtitle">3分钟找到最适合你的车</p>
+          <div class="selector-list">
+            <label class="choice-field"><span>预算范围</span><select id="budgetSelect"><option value="">请选择预算</option><option>¥3,000-¥5,000</option><option>¥5,000-¥10,000</option><option>¥10,000-¥20,000</option><option>¥20,000+</option></select></label>
+            <label class="choice-field"><span>骑行场景</span><select id="sceneSelect"><option value="">请选择场景</option><option>公路竞速</option><option>山地越野</option><option>城市通勤</option><option>砾石探索</option><option>长途旅行</option></select></label>
+            <label class="choice-field"><span>身高</span><select id="heightSelect"><option value="">请选择身高</option><option>155-165cm</option><option>165-175cm</option><option>175-185cm</option><option>185cm以上</option></select></label>
+            <label class="choice-field"><span>骑行经验</span><select id="experienceSelect"><option value="">请选择经验</option><option>新手入门</option><option>日常通勤</option><option>进阶训练</option><option>专业竞赛</option></select></label>
+          </div>
+          <button class="primary-btn" id="recommendButton">开始推荐</button>
+        </div>
+
+        <article class="bike-recommend">
+          <div class="bike-image">
+            <img src="./assets/bike-card.jpg" alt="XDS AD350 自行车" />
+          </div>
+          <div class="bike-info">
+            <h3>XDS AD350</h3>
+            <p class="price">¥ 8,999</p>
+            <ul class="spec-list">
+              <li>适合场景：公路竞速 / 训练</li>
+              <li>推荐尺码：M（175-185cm）</li>
+              <li>推荐配置：105 12速</li>
+            </ul>
+            <button class="ghost-btn" data-title="XDS AD350" data-copy="查看 AD350 详细参数、门店库存和试骑安排。">查看详情</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2 class="section-title">为什么国家队选择喜德盛</h2>
+        <button class="text-link" data-title="更多技术" data-copy="继续了解碳纤维、风洞测试和智能制造。">了解更多技术 →</button>
+      </div>
+      <div class="card-grid">
+        <button class="image-card tech-card" data-title="X-LAB 碳纤维技术" data-copy="更轻、更强、更稳定的碳纤维结构设计。">
+          <img src="./assets/carbon.jpg" alt="碳纤维纹理" />
+          <span class="content"><span class="tech-icon"><svg viewBox="0 0 24 24"><path d="M12 3 4 7v6c0 4.5 3.4 7.2 8 8 4.6-.8 8-3.5 8-8V7l-8-4Z"/><path d="m9 12 2 2 4-5"/></svg></span><h3>X-LAB碳纤维技术</h3><p>更轻 · 更强 · 更稳定</p></span>
+        </button>
+        <button class="image-card tech-card" data-title="风洞空气动力学" data-copy="通过风洞验证减少阻力，让骑行速度更高效。">
+          <img src="./assets/aero.jpg" alt="风洞测试" />
+          <span class="content"><span class="tech-icon"><svg viewBox="0 0 24 24"><path d="M3 8h12a4 4 0 1 1-4 4"/><path d="M4 14h10a3 3 0 1 1-3 3"/><path d="M3 18h6"/></svg></span><h3>风洞空气动力学</h3><p>更快 · 更省力</p></span>
+        </button>
+        <button class="image-card tech-card" data-title="智能制造工艺" data-copy="高精度、一致性和品质保证贯穿生产流程。">
+          <img src="./assets/factory.jpg" alt="智能制造工厂" />
+          <span class="content"><span class="tech-icon"><svg viewBox="0 0 24 24"><path d="M6 20V8l6 4V8l6 4v8H6Z"/><path d="M8 16h2M12 16h2M16 16h2"/></svg></span><h3>智能制造工艺</h3><p>高精度 · 一致性 · 品质保证</p></span>
+        </button>
+        <button class="image-card tech-card" data-title="国家队认证" data-copy="赛事级性能验证，是冠军车队选择的底气。">
+          <img src="./assets/team.jpg" alt="国家队骑行" />
+          <span class="content"><span class="tech-icon"><svg viewBox="0 0 24 24"><path d="M12 3v12"/><path d="m8 7 4-4 4 4"/><path d="M4 14c2 0 2 3 4 3s2-3 4-3 2 3 4 3 2-3 4-3"/><path d="M5 21h14"/></svg></span><h3>国家队认证</h3><p>赛事级性能 · 冠军之选</p></span>
+        </button>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">骑向你热爱的生活</h2>
+      <div class="card-grid" style="margin-top:18px">
+        <button class="image-card" data-title="城市通勤" data-copy="绿色出行、轻松自由，适合日常生活节奏。">
+          <img src="./assets/life-city.jpg" alt="城市通勤生活" /><span class="content"><span class="life-icon"><svg viewBox="0 0 24 24"><path d="M6 19a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM18 19a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M6 16h5l3-6h2l2 6M10 9h4"/></svg></span><h3>城市通勤</h3><p>绿色出行 · 轻松自由</p></span>
+        </button>
+        <button class="image-card" data-title="周末骑游" data-copy="探索自然，释放压力，把周末交给路线。">
+          <img src="./assets/life-weekend.jpg" alt="周末骑游" /><span class="content"><span class="life-icon"><svg viewBox="0 0 24 24"><path d="M4 17 10 9l4 5 3-4 3 7H4Z"/><circle cx="8" cy="6" r="2"/></svg></span><h3>周末骑游</h3><p>探索自然 · 释放压力</p></span>
+        </button>
+        <button class="image-card" data-title="长途旅行" data-copy="远方在路上，风景在心中，适合稳定舒适的长距离车型。">
+          <img src="./assets/life-travel.jpg" alt="长途旅行" /><span class="content"><span class="life-icon"><svg viewBox="0 0 24 24"><path d="M12 21s7-5.2 7-11a7 7 0 0 0-14 0c0 5.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2"/></svg></span><h3>长途旅行</h3><p>远方在路上 · 风景在心中</p></span>
+        </button>
+        <button class="image-card" data-title="专业训练" data-copy="突破自我、挑战极限，用训练数据打磨表现。">
+          <img src="./assets/life-training.jpg" alt="专业训练" /><span class="content"><span class="life-icon"><svg viewBox="0 0 24 24"><path d="M4 19h16"/><path d="M7 16V9M12 16V5M17 16v-8"/></svg></span><h3>专业训练</h3><p>突破自我 · 挑战极限</p></span>
+        </button>
+      </div>
+    </section>
+
+    <section class="stats">
+      <img src="./assets/champion.jpg" alt="" />
+      <div class="stats-inner">
+        <h2 class="stats-title">冠军选择的力量</h2>
+        <div class="stat"><strong>300+</strong><span>国内赛事征程</span></div>
+        <div class="stat"><strong>100+</strong><span>国际赛事奖项</span></div>
+        <div class="stat"><strong class="long-stat">1000万+</strong><span>骑行用户的选择</span></div>
+      </div>
+    </section>
+
+    <section class="stores" id="stores">
+      <div class="section">
+        <div>
+          <h2 class="section-title">亲自体验速度</h2>
+          <p class="section-subtitle">全国1000+门店 · 预约试骑</p>
+          <div class="store-tools">
+            <div class="search-box">
+              <input id="storeInput" placeholder="输入城市或区域" aria-label="输入城市或区域" />
+              <button id="storeSearch">查找门店</button>
+            </div>
+            <div class="service-pills">
+              <button data-title="专业顾问" data-copy="专业顾问会根据身高、预算和骑行场景给出建议。">专业顾问</button>
+              <button data-title="免费试骑" data-copy="免费试骑可提前预约，建议选择附近旗舰店。">免费试骑</button>
+              <button data-title="购车优惠" data-copy="购车优惠活动需以门店实时政策为准。">购车优惠</button>
+            </div>
+          </div>
+        </div>
+        <div class="map-panel">
+          <img src="./assets/map.jpg" alt="全国门店地图" />
+          <article class="store-card">
+            <h3>喜德盛深圳旗舰店</h3>
+            <p>深圳市南山区科技园科苑路159号</p>
+            <p>营业时间：09:00-21:00</p>
+            <p>电话：0755-2566 6888</p>
+            <button class="primary-btn" data-title="预约试骑" data-copy="深圳旗舰店预约试骑已选中，顾问将确认时间。">预约试骑</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">骑行学院</h2>
+          <p class="section-subtitle">专业知识 · 骑行技巧 · 装备推荐</p>
+        </div>
+        <button class="text-link" data-title="更多文章" data-copy="已打开骑行学院更多文章。">查看更多 →</button>
+      </div>
+      <div class="card-grid">
+        <button class="image-card academy-card" data-title="如何选择你的第一辆公路车" data-copy="从预算、路况、车架尺码和配置开始选。">
+          <img src="./assets/academy-1.jpg" alt="公路车选购" /><span class="tag">新手指南</span><span class="content"><h3>如何选择你的第一辆公路车</h3><p>1.2万阅读</p></span>
+        </button>
+        <button class="image-card academy-card" data-title="公路车爬坡技巧全攻略" data-copy="踏频、齿比、坐姿和补给节奏都很关键。">
+          <img src="./assets/academy-2.jpg" alt="爬坡技巧" /><span class="tag">进阶骑行</span><span class="content"><h3>公路车爬坡技巧全攻略</h3><p>8560阅读</p></span>
+        </button>
+        <button class="image-card academy-card" data-title="100公里骑行训练计划" data-copy="分阶段建立耐力、速度和恢复能力。">
+          <img src="./assets/academy-3.jpg" alt="训练计划" /><span class="tag">训练计划</span><span class="content"><h3>100公里骑行训练计划</h3><p>6320阅读</p></span>
+        </button>
+        <button class="image-card academy-card" data-title="骑行头盔选购指南" data-copy="安全认证、贴合度、通风和重量都要看。">
+          <img src="./assets/academy-4.jpg" alt="头盔选购" /><span class="tag">装备推荐</span><span class="content"><h3>骑行头盔选购指南</h3><p>4780阅读</p></span>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <aside class="float-tools" aria-label="快捷工具">
+    <button data-title="在线咨询" data-copy="在线顾问将协助你选车、查库存或预约试骑。"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.5 9.7 9.7 0 0 1-4-.8L3 21l1.7-4.2A8.7 8.7 0 1 1 21 11.5Z"/></svg><span>在线咨询</span></button>
+    <button data-action="scroll" data-target="stores"><svg viewBox="0 0 24 24"><path d="M12 21s7-5.2 7-11a7 7 0 0 0-14 0c0 5.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2"/></svg><span>附近门店</span></button>
+    <button data-title="预约试骑" data-copy="预约试骑通道已激活，将为你匹配可试骑车型。"><svg viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 10h18M5 5h14a2 2 0 0 1 2 2v14H3V7a2 2 0 0 1 2-2Z"/></svg><span>预约试骑</span></button>
+    <button data-action="scroll" data-target="top"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg><span>回到顶部</span></button>
+  </aside>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <div class="brand">
+          <img class="brand-logo" src="./assets/logo-xds.png" alt="XDS 喜德盛" />
+          <span class="brand-sub">超轻科技 中国好车</span>
+        </div>
+        <p>深圳市喜德盛自行车股份有限公司始创于1995年，专注高端自行车研发制造，为用户提供专业骑行装备与服务。</p>
+      </div>
+      <div>
+        <h3>产品系列</h3>
+        <ul><li><a href="#products">公路车</a></li><li><a href="#products">山地车</a></li><li><a href="#products">城市车</a></li><li><a href="#products">砾石车</a></li></ul>
+      </div>
+      <div>
+        <h3>服务支持</h3>
+        <ul><li><a href="#stores">售后服务</a></li><li><a href="#stores">保修政策</a></li><li><a href="#stores">保养预约</a></li><li><a href="#stores">正品查询</a></li></ul>
+      </div>
+      <div>
+        <h3>关于我们</h3>
+        <ul><li><a href="#top">品牌故事</a></li><li><a href="#top">发展历程</a></li><li><a href="#top">新闻中心</a></li><li><a href="#top">加入我们</a></li></ul>
+      </div>
+    </div>
+  </footer>
+
+  <section class="modal" id="modal" aria-hidden="true">
+    <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <header>
+        <h2 id="modalTitle">标题</h2>
+        <button class="close" id="closeModal" aria-label="关闭">×</button>
+      </header>
+      <div class="dialog-body" id="modalCopy"></div>
+      <div class="dialog-actions">
+        <button class="ghost-btn" id="closeSecondary">稍后再看</button>
+        <button class="primary-btn" id="confirmAction">确认</button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalCopy = document.getElementById('modalCopy');
+    const navLinks = document.getElementById('navLinks');
+    const menuBtn = document.getElementById('menuBtn');
+    const storeInput = document.getElementById('storeInput');
+    const aiSelects = {
+      budget: document.getElementById('budgetSelect'),
+      scene: document.getElementById('sceneSelect'),
+      height: document.getElementById('heightSelect'),
+      experience: document.getElementById('experienceSelect'),
+    };
+    const recommendationButton = document.getElementById('recommendButton');
+
+    function openModal(title, copy) {
+      modalTitle.textContent = title;
+      modalCopy.textContent = copy;
+      modal.classList.add('show');
+      modal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeModal() {
+      modal.classList.remove('show');
+      modal.setAttribute('aria-hidden', 'true');
+    }
+
+    function scrollToTarget(id) {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      navLinks.classList.remove('open');
+    }
+
+    function currentAiChoices() {
+      return {
+        budget: aiSelects.budget.value || '¥5,000-¥10,000',
+        scene: aiSelects.scene.value || '公路竞速',
+        height: aiSelects.height.value || '175-185cm',
+        experience: aiSelects.experience.value || '进阶训练',
+      };
+    }
+
+    function updateRecommendation() {
+      const choices = currentAiChoices();
+      const specs = document.querySelectorAll('.spec-list li');
+      if (specs[0]) specs[0].textContent = `适合场景：${choices.scene} / ${choices.experience}`;
+      if (specs[1]) specs[1].textContent = `推荐尺码：${choices.height.includes('185cm以上') ? 'L' : choices.height.includes('155') ? 'S' : choices.height.includes('165') ? 'M' : 'M'}（${choices.height}）`;
+      if (specs[2]) specs[2].textContent = `预算匹配：${choices.budget}`;
+    }
+
+    document.querySelectorAll('[data-title], [data-action]').forEach((element) => {
+      if (element.id === 'storeSearch') return;
+      element.addEventListener('click', () => {
+        const action = element.dataset.action;
+        if (action === 'scroll') {
+          scrollToTarget(element.dataset.target);
+          return;
+        }
+        openModal(element.dataset.title || element.textContent.trim(), element.dataset.copy || '该模块已激活。');
+      });
+    });
+
+    document.getElementById('storeSearch').addEventListener('click', () => {
+      const area = storeInput.value.trim() || '深圳';
+      openModal('为你找到附近门店', `${area}附近推荐：喜德盛深圳旗舰店。营业时间 09:00-21:00，可预约试骑与专业选车顾问。`);
+    });
+
+    Object.values(aiSelects).forEach((select) => {
+      select.addEventListener('change', updateRecommendation);
+    });
+
+    recommendationButton.addEventListener('click', () => {
+      updateRecommendation();
+      const choices = currentAiChoices();
+      openModal('AI 推荐结果', `已根据 ${choices.budget}、${choices.scene}、${choices.height}、${choices.experience} 为你推荐 XDS AD350。`);
+    });
+
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    document.getElementById('closeModal').addEventListener('click', closeModal);
+    document.getElementById('closeSecondary').addEventListener('click', closeModal);
+    document.getElementById('confirmAction').addEventListener('click', closeModal);
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) closeModal();
+    });
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeModal();
+    });
+  </script>
+</body>
+</html>
