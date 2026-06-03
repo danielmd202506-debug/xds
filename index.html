@@ -113,6 +113,152 @@
       outline: none;
     }
 
+    .nav-link.is-active {
+      color: #fff;
+    }
+
+    .mega-menu {
+      position: fixed;
+      left: 50%;
+      top: 72px;
+      z-index: 49;
+      width: min(1180px, calc(100vw - 48px));
+      transform: translate(-50%, -12px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease, transform .18s ease;
+    }
+
+    .mega-menu.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, 0);
+    }
+
+    .mega-panel {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      padding: 18px;
+      border: 1px solid rgba(104, 178, 255, .24);
+      border-radius: var(--radius);
+      background: rgba(3, 10, 18, .96);
+      box-shadow: 0 28px 80px rgba(0, 0, 0, .62), 0 0 42px rgba(8, 119, 255, .16);
+      backdrop-filter: blur(18px);
+    }
+
+    .mega-card {
+      position: relative;
+      min-height: 268px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align: left;
+      background: #070b10;
+    }
+
+    .mega-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, .05), rgba(0, 0, 0, .72));
+      z-index: 0;
+    }
+
+    .mega-card::after {
+      content: "";
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      top: 18px;
+      height: 1px;
+      background: rgba(255, 255, 255, .16);
+      z-index: 1;
+    }
+
+    .mega-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .mega-kicker {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 0 10px;
+      border-radius: 999px;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+      background: rgba(255, 255, 255, .12);
+      white-space: nowrap;
+    }
+
+    .mega-card h3 {
+      margin: 92px 0 10px;
+      font-size: 25px;
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    .mega-card p {
+      margin: 0;
+      color: rgba(238, 246, 255, .82);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .mega-points {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .mega-points span {
+      min-height: 26px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      color: rgba(255, 255, 255, .9);
+      font-size: 12px;
+      background: rgba(0, 0, 0, .28);
+      border: 1px solid rgba(255, 255, 255, .12);
+      white-space: nowrap;
+    }
+
+    .mega-card.pro {
+      background:
+        linear-gradient(145deg, rgba(8, 8, 9, .68), rgba(42, 42, 45, .35)),
+        url("./assets/team.webp") center / cover;
+    }
+
+    .mega-card.pro::after {
+      background: #e02b2b;
+      box-shadow: 0 0 18px rgba(224, 43, 43, .55);
+    }
+
+    .mega-card.mass {
+      background:
+        linear-gradient(145deg, rgba(228, 0, 28, .76), rgba(236, 241, 247, .28)),
+        url("./assets/life-city.webp") center / cover;
+    }
+
+    .mega-card.mass .mega-kicker {
+      background: #f22d36;
+    }
+
+    .mega-card.smart {
+      background:
+        radial-gradient(circle at 80% 18%, rgba(55, 180, 255, .62), transparent 30%),
+        linear-gradient(145deg, rgba(4, 18, 35, .82), rgba(10, 52, 84, .46)),
+        url("./assets/city.webp") center / cover;
+    }
+
+    .mega-card.smart .mega-kicker {
+      background: rgba(10, 142, 255, .9);
+    }
+
     .nav-actions {
       display: flex;
       align-items: center;
@@ -931,6 +1077,23 @@
         border-radius: 8px;
         background: rgba(255, 255, 255, .05);
       }
+      .mega-menu {
+        top: 128px;
+        width: calc(100vw - 28px);
+        max-height: calc(100vh - 146px);
+        overflow: auto;
+      }
+      .mega-panel {
+        grid-template-columns: 1fr;
+        padding: 12px;
+      }
+      .mega-card {
+        min-height: 220px;
+      }
+      .mega-card h3 {
+        margin-top: 62px;
+        font-size: 22px;
+      }
       .nav-actions .icon-btn { display: none; }
       .nav-actions .primary-btn {
         min-height: 38px;
@@ -1035,6 +1198,11 @@
 
       .nav-actions .primary-btn {
         display: none;
+      }
+
+      .mega-menu {
+        top: 118px;
+        width: calc(100vw - 24px);
       }
 
       .hero {
@@ -1146,7 +1314,7 @@
       </div>
 
       <div class="nav-links" id="navLinks">
-        <button class="nav-link" data-title="产品" data-copy="产品中心包含公路车、山地车、城市通勤和砾石探索系列。">产品</button>
+        <button class="nav-link" id="productNav" data-menu="products" aria-expanded="false" aria-controls="productMega">产品</button>
         <button class="nav-link" data-title="技术" data-copy="查看 X-LAB 碳纤维、空气动力学和智能制造技术。">技术</button>
         <button class="nav-link" data-title="赛事" data-copy="浏览车队故事、赛事里程和冠军装备。">赛事</button>
         <button class="nav-link" data-title="骑行学院" data-copy="选车技巧、训练计划、装备推荐都在这里。">骑行学院</button>
@@ -1169,6 +1337,29 @@
       </div>
     </nav>
   </header>
+
+  <section class="mega-menu" id="productMega" aria-hidden="true">
+    <div class="mega-panel" role="dialog" aria-label="产品分区导航">
+      <button class="mega-card pro" data-action="scroll" data-target="tech">
+        <span class="mega-kicker">X-LAB 专业线</span>
+        <h3>硬核竞速与赛事背书</h3>
+        <p>黑灰主色与细红线点缀，聚焦车架技术参数、环法与国家队赛事实拍，面向硬核骑行玩家。</p>
+        <span class="mega-points"><span>碳纤维车架</span><span>空气动力学</span><span>国家队认证</span></span>
+      </button>
+      <button class="mega-card mass" data-action="scroll" data-target="products">
+        <span class="mega-kicker">大众山地 / 通勤车</span>
+        <h3>价格配置一眼看懂</h3>
+        <p>亮红与浅灰信息层级，突出价格、配置和上学、短途骑行等适用场景，降低选购理解门槛。</p>
+        <span class="mega-points"><span>通勤代步</span><span>山地入门</span><span>高性价比</span></span>
+      </button>
+      <button class="mega-card smart" data-title="鸿蒙智联电助力" data-copy="智能专区将突出 APP 互联、电控续航、骑行数据和年轻化智能消费体验。">
+        <span class="mega-kicker">鸿蒙智联电助力</span>
+        <h3>智能互联骑行专区</h3>
+        <p>加入智能图标和互联语义，突出 APP 互联、电控续航等卖点，瞄准年轻智能化消费群体。</p>
+        <span class="mega-points"><span>APP 互联</span><span>电控续航</span><span>智能助力</span></span>
+      </button>
+    </div>
+  </section>
 
   <main>
     <section class="hero" id="top">
@@ -1246,7 +1437,7 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="tech">
       <div class="section-head">
         <h2 class="section-title">为什么国家队选择喜德盛</h2>
         <button class="text-link" data-title="更多技术" data-copy="继续了解碳纤维、风洞测试和智能制造。">了解更多技术 →</button>
@@ -1405,6 +1596,8 @@
     const modalCopy = document.getElementById('modalCopy');
     const navLinks = document.getElementById('navLinks');
     const menuBtn = document.getElementById('menuBtn');
+    const productNav = document.getElementById('productNav');
+    const productMega = document.getElementById('productMega');
     const storeInput = document.getElementById('storeInput');
     const aiSelects = {
       budget: document.getElementById('budgetSelect'),
@@ -1415,6 +1608,7 @@
     const recommendationButton = document.getElementById('recommendButton');
 
     function openModal(title, copy) {
+      closeProductMega();
       modalTitle.textContent = title;
       modalCopy.textContent = copy;
       modal.classList.add('show');
@@ -1426,7 +1620,30 @@
       modal.setAttribute('aria-hidden', 'true');
     }
 
+    function openProductMega() {
+      productMega.classList.add('open');
+      productMega.setAttribute('aria-hidden', 'false');
+      productNav.classList.add('is-active');
+      productNav.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeProductMega() {
+      productMega.classList.remove('open');
+      productMega.setAttribute('aria-hidden', 'true');
+      productNav.classList.remove('is-active');
+      productNav.setAttribute('aria-expanded', 'false');
+    }
+
+    function toggleProductMega() {
+      if (productMega.classList.contains('open')) {
+        closeProductMega();
+      } else {
+        openProductMega();
+      }
+    }
+
     function scrollToTarget(id) {
+      closeProductMega();
       document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       navLinks.classList.remove('open');
     }
@@ -1460,6 +1677,19 @@
       });
     });
 
+    productNav.addEventListener('click', (event) => {
+      event.stopPropagation();
+      toggleProductMega();
+    });
+
+    productMega.addEventListener('click', (event) => {
+      event.stopPropagation();
+    });
+
+    document.addEventListener('click', () => {
+      closeProductMega();
+    });
+
     document.getElementById('storeSearch').addEventListener('click', () => {
       const area = storeInput.value.trim() || '深圳';
       openModal('为你找到附近门店', `${area}附近推荐：喜德盛深圳旗舰店。营业时间 09:00-21:00，可预约试骑与专业选车顾问。`);
@@ -1477,6 +1707,7 @@
 
     menuBtn.addEventListener('click', () => {
       navLinks.classList.toggle('open');
+      closeProductMega();
     });
 
     document.getElementById('closeModal').addEventListener('click', closeModal);
@@ -1486,7 +1717,10 @@
       if (event.target === modal) closeModal();
     });
     window.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') closeModal();
+      if (event.key === 'Escape') {
+        closeModal();
+        closeProductMega();
+      }
     });
   </script>
 </body>
