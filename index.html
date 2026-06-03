@@ -206,13 +206,16 @@
       position: absolute;
       inset: 0;
       z-index: 0;
+      background:
+        linear-gradient(180deg, #02060a 0%, #03101c 72%, #03101c 100%),
+        radial-gradient(circle at 72% 55%, rgba(8, 119, 255, .2), transparent 34%);
     }
 
     .hero-bg img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      object-position: center right;
+      object-fit: contain;
+      object-position: right bottom;
       opacity: .96;
     }
 
@@ -903,7 +906,6 @@
       .nav { gap: 18px; }
       .nav-links { gap: 20px; }
       .hero-inner { grid-template-columns: minmax(330px, 460px) 1fr; }
-      .hero-bike img { width: min(650px, 62vw); }
       .bike-recommend { grid-template-columns: 190px 1fr; }
       .footer-inner { grid-template-columns: repeat(3, 1fr); }
     }
@@ -977,7 +979,7 @@
         font-size: 16px;
       }
 
-      .hero-bg img { object-position: 62% center; }
+      .hero-bg img { object-position: right bottom; }
 
       .card-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -1050,7 +1052,7 @@
         padding-top: 28px;
       }
 
-      .hero-bg img { object-position: 68% center; }
+      .hero-bg img { object-position: 72% bottom; }
 
       .hero-actions {
         display: grid;
