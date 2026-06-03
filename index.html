@@ -146,6 +146,7 @@
       padding: 0 24px;
       border: 1px solid transparent;
       font-weight: 700;
+      white-space: nowrap;
       transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
     }
 
@@ -327,6 +328,9 @@
       margin: 0 0 6px;
       font-size: 21px;
       letter-spacing: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .image-card p {
@@ -546,6 +550,7 @@
       text-align: center;
       min-width: max-content;
       white-space: nowrap;
+      justify-self: center;
     }
 
     .stat strong {
@@ -564,6 +569,7 @@
       align-items: baseline;
       flex-wrap: nowrap;
       min-width: max-content;
+      width: max-content;
       font-size: clamp(32px, 2.8vw, 44px);
       white-space: nowrap;
       word-break: normal;
@@ -1083,7 +1089,7 @@
       }
 
       .stats-inner {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(max-content, 1fr);
         gap: 14px;
       }
 
