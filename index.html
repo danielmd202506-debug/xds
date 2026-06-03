@@ -176,7 +176,8 @@
       position: relative;
       min-height: 650px;
       overflow: hidden;
-      border-bottom: 1px solid rgba(78, 156, 255, .13);
+      border-bottom: 0;
+      background: #02060a;
     }
 
     .hero::before {
@@ -189,32 +190,16 @@
       z-index: 1;
     }
 
-    .light-beam {
-      position: absolute;
-      right: -8vw;
-      top: 100px;
-      width: 58vw;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, #21a7ff, #71d9ff);
-      box-shadow: 0 0 14px #1597ff, 0 0 32px rgba(13, 135, 255, .8);
-      transform: rotate(-31deg);
-      transform-origin: right center;
-      z-index: 0;
-    }
-
     .hero-bg {
       position: absolute;
       inset: 0;
       z-index: 0;
-      background:
-        linear-gradient(180deg, #02060a 0%, #03101c 72%, #03101c 100%),
-        radial-gradient(circle at 72% 55%, rgba(8, 119, 255, .2), transparent 34%);
     }
 
     .hero-bg img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
       object-position: center bottom;
       opacity: .96;
     }
@@ -1182,7 +1167,6 @@
       <div class="hero-bg" aria-hidden="true">
         <img src="./assets/hero-bike.webp" alt="" fetchpriority="high" decoding="async" />
       </div>
-      <div class="light-beam"></div>
       <div class="hero-inner">
         <div class="hero-copy">
           <h1>让速度<br />重新定义边界</h1>
