@@ -553,7 +553,8 @@
 
     .stat {
       text-align: center;
-      min-width: 0;
+      min-width: max-content;
+      white-space: nowrap;
     }
 
     .stat strong {
@@ -568,9 +569,14 @@
     }
 
     .stat strong.long-stat {
-      display: inline-block;
+      display: inline-flex;
+      align-items: baseline;
+      flex-wrap: nowrap;
       min-width: max-content;
       font-size: clamp(32px, 2.8vw, 44px);
+      white-space: nowrap;
+      word-break: normal;
+      line-break: strict;
     }
 
     .stat span {
@@ -1294,7 +1300,7 @@
         <h2 class="stats-title">冠军选择的力量</h2>
         <div class="stat"><strong>300+</strong><span>国内赛事征程</span></div>
         <div class="stat"><strong>100+</strong><span>国际赛事奖项</span></div>
-        <div class="stat"><strong class="long-stat">1000万+</strong><span>骑行用户的选择</span></div>
+        <div class="stat no-wrap-stat"><strong class="long-stat"><span>1000</span><span>万+</span></strong><span>骑行用户的选择</span></div>
       </div>
     </section>
 
