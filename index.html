@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="preload" as="image" href="./assets/hero-bike.webp?v=hero-no-overlap" media="(min-width: 861px)" fetchpriority="high" />
-  <link rel="preload" as="image" href="./assets/hero-bike-mobile.webp?v=mobile-hero-nav-fix" media="(max-width: 860px)" fetchpriority="high" />
+  <link rel="preload" as="image" href="./assets/hero-bike-mobile.webp?v=mobile-hero-no-overlap" media="(max-width: 860px)" fetchpriority="high" />
   <title>喜德盛 XDS - 速度重新定义边界</title>
   <style>
     :root {
@@ -1149,7 +1149,10 @@
         font-size: 16px;
       }
 
-      .hero-bg img { object-position: center bottom; }
+      .hero-bg img {
+        object-fit: contain;
+        object-position: center bottom;
+      }
 
       .card-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -1236,7 +1239,10 @@
         padding-bottom: 190px;
       }
 
-      .hero-bg img { object-position: center bottom; }
+      .hero-bg img {
+        object-fit: contain;
+        object-position: center bottom;
+      }
 
       .hero-actions {
         display: grid;
@@ -1388,7 +1394,7 @@
     <section class="hero" id="top">
       <div class="hero-bg" aria-hidden="true">
         <picture>
-          <source media="(max-width: 860px)" srcset="./assets/hero-bike-mobile.webp?v=mobile-hero-nav-fix" />
+          <source media="(max-width: 860px)" srcset="./assets/hero-bike-mobile.webp?v=mobile-hero-no-overlap" />
           <img src="./assets/hero-bike.webp?v=hero-no-overlap" alt="" fetchpriority="high" decoding="async" />
         </picture>
       </div>
