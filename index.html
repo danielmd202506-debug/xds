@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="preload" as="image" href="./assets/hero-bike.webp?v=hero-no-overlap" fetchpriority="high" />
+  <link rel="preload" as="image" href="./assets/hero-bike.webp?v=hero-no-overlap" media="(min-width: 861px)" fetchpriority="high" />
+  <link rel="preload" as="image" href="./assets/hero-bike-mobile.webp?v=mobile-hero-nav-fix" media="(max-width: 860px)" fetchpriority="high" />
   <title>喜德盛 XDS - 速度重新定义边界</title>
   <style>
     :root {
@@ -341,6 +342,12 @@
       position: absolute;
       inset: 0;
       z-index: 0;
+    }
+
+    .hero-bg picture {
+      display: block;
+      width: 100%;
+      height: 100%;
     }
 
     .hero-bg img {
@@ -1093,23 +1100,31 @@
         margin-top: 62px;
         font-size: 22px;
       }
+      .nav-actions {
+        gap: 8px;
+      }
       .nav-actions .icon-btn { display: none; }
       .nav-actions .primary-btn {
         min-height: 38px;
         padding: 0 14px;
+        font-size: 13px;
       }
-      .hamburger {
+      .nav-actions .hamburger {
         display: grid;
       }
 
-      .hero,
+      .hero {
+        min-height: 700px;
+      }
+
       .hero-inner {
-        min-height: auto;
+        min-height: 700px;
       }
 
       .hero-inner {
         grid-template-columns: 1fr;
-        padding: 54px 0 32px;
+        align-items: start;
+        padding: 92px 0 180px;
       }
 
       .hero::before {
@@ -1195,8 +1210,15 @@
     @media (max-width: 540px) {
       :root { --container: calc(100vw - 24px); }
 
+      .brand { min-width: 118px; }
+      .brand-logo { width: 116px; }
       .nav-actions .primary-btn {
-        display: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 36px;
+        padding: 0 10px;
+        font-size: 13px;
       }
 
       .mega-menu {
@@ -1205,11 +1227,13 @@
       }
 
       .hero {
-        min-height: 640px;
+        min-height: 700px;
       }
 
       .hero-inner {
-        padding-top: 28px;
+        min-height: 700px;
+        padding-top: 82px;
+        padding-bottom: 190px;
       }
 
       .hero-bg img { object-position: center bottom; }
@@ -1363,7 +1387,10 @@
   <main>
     <section class="hero" id="top">
       <div class="hero-bg" aria-hidden="true">
-        <img src="./assets/hero-bike.webp?v=hero-no-overlap" alt="" fetchpriority="high" decoding="async" />
+        <picture>
+          <source media="(max-width: 860px)" srcset="./assets/hero-bike-mobile.webp?v=mobile-hero-nav-fix" />
+          <img src="./assets/hero-bike.webp?v=hero-no-overlap" alt="" fetchpriority="high" decoding="async" />
+        </picture>
       </div>
       <div class="hero-inner">
         <div class="hero-copy">
